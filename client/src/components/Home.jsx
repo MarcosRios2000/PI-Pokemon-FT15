@@ -1,3 +1,4 @@
+import "./Home.css"
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -75,18 +76,19 @@ export default function Home() {
   return loading ? (
     "cargando..."
   ) : (
-    <div>
-      <Link to="/create">Crear pokemon</Link>
-      <h1>CATCH THEM ALL</h1>
+    <div className="Home">
+     <div > <Link className="crear" to="/create">Crear pokemon</Link></div>
+      <h1 className="titulo">POKÉMON</h1>
       <button
+      className="boton1"
         onClick={(e) => {
           handleClick(e);
         }}
       >
         Volver a cargar los pokemons
       </button>
-      <div>
-        <select onChange={(e) => handleSortAlf(e)}>
+      <div className="content-select">
+        <div><select onChange={(e) => handleSortAlf(e)}>
           <option value="asc_alf">Ascendente alfabetico</option>
           <option value="desc_alf">Descendente alfabetico</option>
         </select>
@@ -109,7 +111,7 @@ export default function Home() {
           <option value="created">Creados</option>
           <option value="api">Existentes</option>
         </select>
-
+      </div>
         <Paginado
           pokemonsPerPage={pokemonsPerPage}
           allPokemons={allPokemons?.length}
@@ -119,7 +121,7 @@ export default function Home() {
         {currentPokemons?.length > 0 ? (
           currentPokemons?.map((e) => {
             return (
-              <div key={e.id}>
+              <div key={e.id} className="homeCards">
                 <Link to={"/home/" + e.id}>
                   <Card name={e.name} image={e.image} types={e.types} />
                 </Link>

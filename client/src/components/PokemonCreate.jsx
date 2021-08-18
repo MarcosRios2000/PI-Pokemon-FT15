@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import {
-  postPokemon,
-  getTypes,
-  allTypes,
-  reloadPokemons,
-} from "../actions/index";
+import { postPokemon, getTypes, reloadPokemons } from "../actions/index";
 import { useDispatch, useSelector } from "react-redux";
 const initialState = {
   name: "",
@@ -155,8 +150,6 @@ export default function CharacterCreate() {
             id="main-type"
             name="main-type"
             onChange={(e) => handleSelectTypes(e)}
-            
-            
           >
             {types?.map((e) => {
               return (
@@ -167,7 +160,7 @@ export default function CharacterCreate() {
             })}
           </select>
           {input.types.length > 0 && (
-            <select  name="second-type" onChange={(e) => handleSelectTypes(e)}>
+            <select name="second-type" onChange={(e) => handleSelectTypes(e)}>
               {types?.map((e) => {
                 return (
                   <option value={e.name} key={e.name}>

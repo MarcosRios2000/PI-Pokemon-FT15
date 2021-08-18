@@ -1,3 +1,4 @@
+import "./SearchBar.css"
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -14,7 +15,7 @@ export default function SearchBar() {
 
   function cleanInput() {
     let i = document.getElementById("busqueda");
-    i.value = ""
+    i.value = "";
     //.target.value = ""
   }
 
@@ -25,7 +26,7 @@ export default function SearchBar() {
   }
 
   return (
-    <div>
+    <div >
       <input
         type="text"
         placeholder="Buscar..."

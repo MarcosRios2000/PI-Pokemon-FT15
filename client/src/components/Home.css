@@ -1,0 +1,48 @@
+/* .Home{
+    display: flex;
+    align-items: start;
+} */
+.homeCards{
+    display:inline-block;
+    
+    
+}
+.crear{
+    color: whitesmoke;
+}
+.titulo{
+    -webkit-text-stroke: 1px #2a75bb;
+    color: #c7a008;
+    font-family: cursive;
+    font-size: 45px;
+}
+.boton1 {
+    background-color: #c7a008;
+    border: none;
+    color: black;
+    padding: 4px 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+}
+.content-select select{
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+}
+.content-select select::-ms-expand {
+    display: none;
+}
+.content-select select{
+	cursor: pointer;
+    padding: 4px 4px;
+  	outline: 0; 
+  	border: 0;
+	border-radius: 0;
+	background: #c7a008;
+	color: #000000;
+	font-size: 18px;
+	color: rgb(0, 0, 0);
+    margin-right:5px;
+}
