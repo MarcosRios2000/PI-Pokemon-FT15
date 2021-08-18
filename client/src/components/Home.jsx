@@ -74,10 +74,10 @@ export default function Home() {
   }
 
   return loading ? (
-    "cargando..."
+    <div className="cargando">"Cargando..."</div>
   ) : (
     <div className="Home">
-     <div > <Link className="crear" to="/create">Crear pokemon</Link></div>
+     <div > <Link className="link" to="/create">Crear pokemon</Link></div>
       <h1 className="titulo">POKÉMON</h1>
       <button
       className="boton1"
@@ -118,10 +118,11 @@ export default function Home() {
           paginado={paginado}
         />
         <SearchBar />
+        <div className="homeCards">
         {currentPokemons?.length > 0 ? (
           currentPokemons?.map((e) => {
             return (
-              <div key={e.id} className="homeCards">
+              <div key={e.id} >
                 <Link to={"/home/" + e.id}>
                   <Card name={e.name} image={e.image} types={e.types} />
                 </Link>
@@ -139,8 +140,9 @@ export default function Home() {
             </Link>
           </div>
         ) : (
-          "cargando..."
+          <div className="cargando">"Cargando..."</div>
         )}
+      </div>
       </div>
     </div>
   );

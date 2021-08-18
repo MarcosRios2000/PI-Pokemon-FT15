@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  
+}
+body{
   background-image: url("https://thumbs.gfycat.com/PhonyTenderGraysquirrel-size_restricted.gif");
   background-color: transparent;
   background-size: cover;
@@ -28,8 +31,22 @@
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.link, .button {
+  color: #f5f5f5;
+  margin: 1rem auto;
+  border: 1px solid white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  display: block;
+  position: relative;
+  width: fit-content;
+  
+
+}
+.link:hover, .button:hover{
+  background-color: white;
+  color:black
+
 }
 
 @keyframes App-logo-spin {
@@ -39,4 +56,18 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+a{
+  text-decoration: none;
+}
+.cargando{
+  text-align: center;
+  margin:1rem 0;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+}
+.button{
+  background: none;
 }

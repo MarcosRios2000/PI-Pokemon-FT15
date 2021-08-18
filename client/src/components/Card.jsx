@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Card({ name, image, types }) {
   return (
-    <div>
+    <div className="cardContainer">
       <h3 className="Name" style={{ textTransform: "capitalize" }}>{name}</h3>
       <img src={image} alt={name} width="200px" height="200px" />
       <div style={{ display: "flex", justifyContent: "center" }}>

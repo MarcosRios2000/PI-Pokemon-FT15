@@ -1,23 +1,25 @@
+import "./PokemonCreate.css";
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { postPokemon, getTypes, reloadPokemons } from "../actions/index";
 import { useDispatch, useSelector } from "react-redux";
+
 const initialState = {
   name: "",
   image: "",
-  healthpoints: "",
-  attack: "",
-  defense: "",
-  speed: "",
-  height: "",
-  weight: "",
+  healthpoints: null,
+  attack:null,
+  defense: null,
+  speed: null,
+  height: null,
+  weight: null,
   types: [],
 };
 
 export default function CharacterCreate() {
   const dispatch = useDispatch();
   const types = useSelector((state) => state.types);
-
+  const [error, setError] = useState(initialState);
   const [input, setInput] = useState(initialState);
 
   const handleInputChange = function (e) {
@@ -25,6 +27,41 @@ export default function CharacterCreate() {
       ...input,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const validateInput = function (e) {
+    let { name } = e.target;
+    let numerics = [
+      "healthpoints",
+      "attack",
+      "defense",
+      "speed",
+      "height",
+      "weight",
+    ];
+    let isNumber = (input) => (typeof input === "number" ? true : false);
+    let onlyLeters = new RegExp('/^[A-Z]+$/i')
+    if (name === "name") {
+      if (!/^[A-Z]+$/i.test(e.target.value)) {
+        setError({ ...error, [name]: "El nombre solo debe contener letras" });
+      } else {
+        setError({ ...error, [name]: "" });
+      }
+    }
+    if (name === "image") {
+      if (!e.target.value) {
+        setError({ ...error, [name]: "Debe haber una imagen" });
+      } else {
+        setError({ ...error, [name]: "" });
+      }
+    }
+    if (numerics.includes(name)) {
+      if (e.target.value === "") {
+        setError({ ...error, [name]: "Las estadisticas deben ser numericas" });
+      } else {
+        setError({ ...error, [name]: "" });
+      }
+    }
   };
 
   const clearForm = function () {
@@ -68,84 +105,118 @@ export default function CharacterCreate() {
 
   return (
     <div>
-      <Link to="/home">
-        <button>Volver</button>
+      <Link className="link" to="/home">
+        Volver
       </Link>
-      <h1>Creá tu Pokemon </h1>
+      <h1 style={{color:"white"}}>Creá tu Pokemon </h1>
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className={`inputContainer ${error.name ? "danger" : ""}`}>
           <label>Nombre:</label>
           <input
-            onChange={(e) => handleInputChange(e)}
+            onChange={(e) => {
+              handleInputChange(e);
+              validateInput(e);
+            }}
             type="text"
             name="name"
             value={input.name}
+            className={error && "danger"}
           />
+          <span className="error">{error?.name}</span>
         </div>
-        <div>
+        <div className={`inputContainer ${error.image ? "danger" : ""}`}>
           <label>Image:</label>
           <input
-            onChange={(e) => handleInputChange(e)}
+            onChange={(e) => {
+              handleInputChange(e);
+              validateInput(e);
+            }}
             type="text"
             name="image"
             value={input.image}
+            className={error.image && "danger"}
           />
+          <span className="error">{error?.image}</span>
         </div>
-        <div>
+        <div className={`inputContainer ${error.healthpoints ? "danger" : ""}`}>
           <label>Healthpoints:</label>
           <input
-            onChange={(e) => handleInputChange(e)}
+            onChange={(e) => {
+              handleInputChange(e);
+              validateInput(e);
+            }}
             type="number"
             name="healthpoints"
             value={input.healthpoints}
           />
+          <span className="error">{error?.healthpoints}</span>
         </div>
-        <div>
+        <div className={`inputContainer ${error.attack ? "danger" : ""}`}>
           <label>Attack:</label>
           <input
-            onChange={(e) => handleInputChange(e)}
+            onChange={(e) => {
+              handleInputChange(e);
+              validateInput(e);
+            }}
             type="number"
             name="attack"
             value={input.attack}
           />
+          <span className="error">{error?.attack}</span>
         </div>
-        <div>
+        <div className={`inputContainer ${error.defense ? "danger" : ""}`}>
           <label>Defense:</label>
           <input
-            onChange={(e) => handleInputChange(e)}
+            onChange={(e) => {
+              handleInputChange(e);
+              validateInput(e);
+            }}
             type="number"
             name="defense"
             value={input.defense}
           />
+          <span className="error">{error?.defense}</span>
         </div>
-        <div>
+        <div className={`inputContainer ${error.speed ? "danger" : ""}`}>
           <label>Speed:</label>
           <input
-            onChange={(e) => handleInputChange(e)}
+            onChange={(e) => {
+              handleInputChange(e);
+              validateInput(e);
+            }}
             type="number"
             name="speed"
             value={input.speed}
           />
+          <span className="error">{error?.speed}</span>
         </div>
-        <div>
+        <div className={`inputContainer ${error.height ? "danger" : ""}`}>
           <label>Height:</label>
           <input
-            onChange={(e) => handleInputChange(e)}
+            onChange={(e) => {
+              handleInputChange(e);
+              validateInput(e);
+            }}
             type="number"
             name="height"
             value={input.height}
           />
+          <span className="error">{error?.height}</span>
         </div>
-        <div>
+        <div className={`inputContainer ${error.weight ? "danger" : ""}`}>
           <label>Weight:</label>
           <input
-            onChange={(e) => handleInputChange(e)}
+            onChange={(e) => {
+              handleInputChange(e);
+              validateInput(e);
+            }}
             type="number"
             name="weight"
             value={input.weight}
           />
+          <span className="error">{error?.weight}</span>
         </div>
-        <div>
+        <div className="selectCreate">
           <select
             id="main-type"
             name="main-type"
@@ -171,7 +242,7 @@ export default function CharacterCreate() {
             </select>
           )}
         </div>
-        <button type="submit">Submit</button>
+        <button className="button" type="submit">Submit</button>
       </form>
     </div>
   );
