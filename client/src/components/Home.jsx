@@ -1,106 +1,145 @@
-import React from"react";
+import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getPokemons, getTypes, filterByType, filterByCreation } from "../actions";
+import {
+  getPokemons,
+  getTypes,
+  filterByType,
+  filterByCreation,
+  orderByName,
+  orderByAttack,
+  reloadPokemons,
+} from "../actions";
 import { Link } from "react-router-dom";
 import Card from "./Card";
 import Paginado from "./Paginado";
+import SearchBar from "./SearchBar";
 
-export default function Home (){
+export default function Home() {
+  const [loading, setLoading] = useState(true);
 
-    const [loading, setLoading] = useState(true)
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch()
+  const allPokemons = useSelector((state) => state.pokemons);
+  const allTypes = useSelector((state) => state.types);
 
-    const allPokemons = useSelector((state)=>state.pokemons)
-    const allTypes = useSelector((state)=>state.types)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [orden, setOrden] = useState("");
+  const [orden2, setOrden2] = useState("");
+  const [pokemonsPerPage, setPokemonsPerPage] = useState(9);
+  const indexOfLastPokemon = currentPage * pokemonsPerPage;
+  const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
+  const currentPokemons = Array.isArray(allPokemons)
+    ? allPokemons?.slice(indexOfFirstPokemon, indexOfLastPokemon)
+    : allPokemons;
+  console.log(currentPokemons);
 
-    
-    const [currentPage, setCurrentPage] = useState(1)
-    const [pokemonsPerPage, setPokemonsPerPage] = useState(9)
-    const indexOfLastPokemon = currentPage * pokemonsPerPage
-    const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage
-    const currentPokemons = allPokemons?.slice(indexOfFirstPokemon, indexOfLastPokemon)
+  const paginado = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
-    const paginado = (pageNumber) => {
-        setCurrentPage(pageNumber)
-    }
+  useEffect(() => {
+    dispatch(getPokemons());
+    dispatch(getTypes());
+    setLoading(false);
+  }, [dispatch]);
 
+  function handleClick(e) {
+    e.preventDefault();
+    //dispatch(getPokemons());
+    dispatch(getTypes());
+    dispatch(reloadPokemons());
+  }
 
+  function handleFilterTypes(e) {
+    dispatch(filterByType(e.target.value));
+  }
+  function handleFilterCreation(e) {
+    dispatch(filterByCreation(e.target.value));
+  }
 
+  function handleSortAlf(e) {
+    e.preventDefault();
+    dispatch(orderByName(e.target.value));
+    setCurrentPage(1);
+    setOrden(`Ordenado ${e.target.value}`);
+  }
 
-    useEffect(()=>{
-        dispatch(getPokemons())
-        dispatch(getTypes())
-        setLoading(false)
-    },[dispatch])
+  function handleSortAtt(e) {
+    e.preventDefault();
+    dispatch(orderByAttack(e.target.value));
+    setCurrentPage(1);
+    setOrden2(`Ordenado ${e.target.value}`);
+  }
 
-    
+  return loading ? (
+    "cargando..."
+  ) : (
+    <div>
+      <Link to="/create">Crear pokemon</Link>
+      <h1>CATCH THEM ALL</h1>
+      <button
+        onClick={(e) => {
+          handleClick(e);
+        }}
+      >
+        Volver a cargar los pokemons
+      </button>
+      <div>
+        <select onChange={(e) => handleSortAlf(e)}>
+          <option value="asc_alf">Ascendente alfabetico</option>
+          <option value="desc_alf">Descendente alfabetico</option>
+        </select>
+        <select onChange={(e) => handleSortAtt(e)}>
+          <option value="asc_fu">Ascendente por fuerza</option>
+          <option value="desc_fu">Descendente por fuerza</option>
+        </select>
+        <select onChange={(e) => handleFilterTypes(e)}>
+          <option value="All">Todos</option>
+          {allTypes?.map((e) => {
+            return (
+              <option value={e.name} key={e.name}>
+                {e.name.charAt(0).toUpperCase() + e.name.slice(1)}
+              </option>
+            );
+          })}
+        </select>
+        <select onChange={(e) => handleFilterCreation(e)}>
+          <option value="All">Todos</option>
+          <option value="created">Creados</option>
+          <option value="api">Existentes</option>
+        </select>
 
-    function handleClick(e){
-        e.preventDefault();
-        dispatch(getPokemons());
-        dispatch(getTypes());
-
-    }
-
-    function handleFilterTypes(e){
-        dispatch(filterByType(e.target.value))
-    }
-    function handleFilterCreation(e){
-        dispatch(filterByCreation(e.target.value))
-    }
-    
-    return loading ? 
-    "cargando..." :    
-        (
-        <div>
-            <Link to ="/pokemons">Crear pokemon</Link>
-            <h1>CATCH THEM ALL</h1>
-            <button onClick={e=> {handleClick(e)}}>
-                Volver a cargar los pokemons
-            </button>
-            <div>
-                <select>
-                    <option value= "asc_alf">Ascendente alfabetico</option>
-                    <option value= "desc_alf">Descendente alfabetico</option>
-                </select>
-                <select>
-                    <option value= "asc_fu">Ascendente por fuerza</option>
-                    <option value= "desc_fu">Descendente por fuerza</option>
-                </select>
-                <select onChange={e => handleFilterTypes(e)} >
-                    <option value= "All">Todos</option>
-                   { 
-                    allTypes?.map(e=>{
-                    return(
-                        <option value={e.name} key={e.name} >{e.name.charAt(0).toUpperCase() + e.name.slice(1)}</option>
-                        )
-                    })
-                   }
-                </select>
-                <select onChange={e => handleFilterCreation(e)}>
-                    <option value= "All">Todos</option>
-                    <option value= "created">Creados</option>
-                    <option value= "api">Existentes</option>
-                </select>
-                <Paginado
-                pokemonsPerPage= {pokemonsPerPage}
-                allPokemons= {allPokemons?.length}
-                paginado= {paginado}
-                />
-                {
-                   currentPokemons?.length > 0 ? currentPokemons?.map(e=>{
-                        return(
-                            <div key={e.id} >
-                                <Link to={"/home/" + e.id}>
-                                    <Card name={e.name} image={e.image} types={e.types} />
-                                </Link>
-                            </div>
-                        )
-                    }) : "cargando..."
-                }
-            </div>
-        </div>
-    )
+        <Paginado
+          pokemonsPerPage={pokemonsPerPage}
+          allPokemons={allPokemons?.length}
+          paginado={paginado}
+        />
+        <SearchBar />
+        {currentPokemons?.length > 0 ? (
+          currentPokemons?.map((e) => {
+            return (
+              <div key={e.id}>
+                <Link to={"/home/" + e.id}>
+                  <Card name={e.name} image={e.image} types={e.types} />
+                </Link>
+              </div>
+            );
+          })
+        ) : Object.entries(currentPokemons).length !== 0 ? (
+          <div key={currentPokemons.id}>
+            <Link to={"/home/" + currentPokemons.id}>
+              <Card
+                name={currentPokemons.name}
+                image={currentPokemons.image}
+                types={currentPokemons.types}
+              />
+            </Link>
+          </div>
+        ) : (
+          "cargando..."
+        )}
+      </div>
+    </div>
+  );
 }
