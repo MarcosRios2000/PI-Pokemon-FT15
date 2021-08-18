@@ -1,10 +1,12 @@
-import "./Card.css"
+import "./Card.css";
 import React from "react";
 
 export default function Card({ name, image, types }) {
   return (
     <div className="cardContainer">
-      <h3 className="Name" style={{ textTransform: "capitalize" }}>{name}</h3>
+      <h3 className="Name" style={{ textTransform: "capitalize" }}>
+        {name}
+      </h3>
       <img src={image} alt={name} width="200px" height="200px" />
       <div style={{ display: "flex", justifyContent: "center" }}>
         {types.map((e, index) => {

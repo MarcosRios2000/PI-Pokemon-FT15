@@ -1,7 +1,5 @@
-const { DataTypes } = require('sequelize');
+const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
-    // defino el modelo
-    sequelize.define('pokemon_type', {
-
-    });
-  };
+  // defino el modelo
+  sequelize.define("pokemon_type", {});
+};

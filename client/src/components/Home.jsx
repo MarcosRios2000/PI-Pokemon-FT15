@@ -1,4 +1,4 @@
-import "./Home.css"
+import "./Home.css";
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -77,10 +77,14 @@ export default function Home() {
     <div className="cargando">"Cargando..."</div>
   ) : (
     <div className="Home">
-     <div > <Link className="link" to="/create">Crear pokemon</Link></div>
+      <div>
+        <Link className="link" to="/create">
+          Crear pokemon
+        </Link>
+      </div>
       <h1 className="titulo">POKÉMON</h1>
       <button
-      className="boton1"
+        className="boton1"
         onClick={(e) => {
           handleClick(e);
         }}
@@ -88,30 +92,31 @@ export default function Home() {
         Volver a cargar los pokemons
       </button>
       <div className="content-select">
-        <div><select onChange={(e) => handleSortAlf(e)}>
-          <option value="asc_alf">Ascendente alfabetico</option>
-          <option value="desc_alf">Descendente alfabetico</option>
-        </select>
-        <select onChange={(e) => handleSortAtt(e)}>
-          <option value="asc_fu">Ascendente por fuerza</option>
-          <option value="desc_fu">Descendente por fuerza</option>
-        </select>
-        <select onChange={(e) => handleFilterTypes(e)}>
-          <option value="All">Todos</option>
-          {allTypes?.map((e) => {
-            return (
-              <option value={e.name} key={e.name}>
-                {e.name.charAt(0).toUpperCase() + e.name.slice(1)}
-              </option>
-            );
-          })}
-        </select>
-        <select onChange={(e) => handleFilterCreation(e)}>
-          <option value="All">Todos</option>
-          <option value="created">Creados</option>
-          <option value="api">Existentes</option>
-        </select>
-      </div>
+        <div>
+          <select onChange={(e) => handleSortAlf(e)}>
+            <option value="asc_alf">Ascendente alfabetico</option>
+            <option value="desc_alf">Descendente alfabetico</option>
+          </select>
+          <select onChange={(e) => handleSortAtt(e)}>
+            <option value="asc_fu">Ascendente por fuerza</option>
+            <option value="desc_fu">Descendente por fuerza</option>
+          </select>
+          <select onChange={(e) => handleFilterTypes(e)}>
+            <option value="All">Todos</option>
+            {allTypes?.map((e) => {
+              return (
+                <option value={e.name} key={e.name}>
+                  {e.name.charAt(0).toUpperCase() + e.name.slice(1)}
+                </option>
+              );
+            })}
+          </select>
+          <select onChange={(e) => handleFilterCreation(e)}>
+            <option value="All">Todos</option>
+            <option value="created">Creados</option>
+            <option value="api">Existentes</option>
+          </select>
+        </div>
         <Paginado
           pokemonsPerPage={pokemonsPerPage}
           allPokemons={allPokemons?.length}
@@ -119,30 +124,30 @@ export default function Home() {
         />
         <SearchBar />
         <div className="homeCards">
-        {currentPokemons?.length > 0 ? (
-          currentPokemons?.map((e) => {
-            return (
-              <div key={e.id} >
-                <Link to={"/home/" + e.id}>
-                  <Card name={e.name} image={e.image} types={e.types} />
-                </Link>
-              </div>
-            );
-          })
-        ) : Object.entries(currentPokemons).length !== 0 ? (
-          <div key={currentPokemons.id}>
-            <Link to={"/home/" + currentPokemons.id}>
-              <Card
-                name={currentPokemons.name}
-                image={currentPokemons.image}
-                types={currentPokemons.types}
-              />
-            </Link>
-          </div>
-        ) : (
-          <div className="cargando">"Cargando..."</div>
-        )}
-      </div>
+          {currentPokemons?.length > 0 ? (
+            currentPokemons?.map((e) => {
+              return (
+                <div key={e.id}>
+                  <Link to={"/home/" + e.id}>
+                    <Card name={e.name} image={e.image} types={e.types} />
+                  </Link>
+                </div>
+              );
+            })
+          ) : Object.entries(currentPokemons).length !== 0 ? (
+            <div key={currentPokemons.id}>
+              <Link to={"/home/" + currentPokemons.id}>
+                <Card
+                  name={currentPokemons.name}
+                  image={currentPokemons.image}
+                  types={currentPokemons.types}
+                />
+              </Link>
+            </div>
+          ) : (
+            <div className="cargando">"Cargando..."</div>
+          )}
+        </div>
       </div>
     </div>
   );

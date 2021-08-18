@@ -1,4 +1,4 @@
-import "./SearchBar.css"
+import "./SearchBar.css";
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
@@ -26,7 +26,7 @@ export default function SearchBar() {
   }
 
   return (
-    <div >
+    <div>
       <input
         type="text"
         placeholder="Buscar..."

@@ -8,7 +8,7 @@ const initialState = {
   name: "",
   image: "",
   healthpoints: null,
-  attack:null,
+  attack: null,
   defense: null,
   speed: null,
   height: null,
@@ -40,7 +40,7 @@ export default function CharacterCreate() {
       "weight",
     ];
     let isNumber = (input) => (typeof input === "number" ? true : false);
-    let onlyLeters = new RegExp('/^[A-Z]+$/i')
+    let onlyLeters = new RegExp("/^[A-Z]+$/i");
     if (name === "name") {
       if (!/^[A-Z]+$/i.test(e.target.value)) {
         setError({ ...error, [name]: "El nombre solo debe contener letras" });
@@ -108,7 +108,7 @@ export default function CharacterCreate() {
       <Link className="link" to="/home">
         Volver
       </Link>
-      <h1 style={{color:"white"}}>Creá tu Pokemon </h1>
+      <h1 style={{ color: "white" }}>Creá tu Pokemon </h1>
       <form onSubmit={handleSubmit}>
         <div className={`inputContainer ${error.name ? "danger" : ""}`}>
           <label>Nombre:</label>
@@ -242,7 +242,9 @@ export default function CharacterCreate() {
             </select>
           )}
         </div>
-        <button className="button" type="submit">Submit</button>
+        <button className="button" type="submit">
+          Submit
+        </button>
       </form>
     </div>
   );

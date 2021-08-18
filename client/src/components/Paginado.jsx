@@ -1,4 +1,4 @@
-import "./Paginado.css"
+import "./Paginado.css";
 import React from "react";
 
 export default function Paginado({ pokemonsPerPage, allPokemons, paginado }) {
