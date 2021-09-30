@@ -2,6 +2,7 @@ const initialState = {
   pokemons: [],
   allPokemons: [],
   detail: [],
+  types: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -48,7 +49,7 @@ function rootReducer(state = initialState, action) {
       const allPokemons2 = state.allPokemons;
       const creationFiltered =
         action.payload === "created"
-          ? allPokemons2?.filter((el) => el.id.length > 10)
+          ? allPokemons2?.filter((el) => typeof(el.id) === "string")
           : allPokemons2?.filter((el) => el.id < 50);
       return {
         ...state,

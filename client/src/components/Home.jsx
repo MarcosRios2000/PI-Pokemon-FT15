@@ -23,6 +23,7 @@ export default function Home() {
 
   const allPokemons = useSelector((state) => state.pokemons);
   const allTypes = useSelector((state) => state.types);
+  console.log(allTypes, "LINEA 26")
 
   const [currentPage, setCurrentPage] = useState(1);
   const [orden, setOrden] = useState("");
@@ -117,11 +118,13 @@ export default function Home() {
             <option value="api">Existentes</option>
           </select>
         </div>
+
         <Paginado
           pokemonsPerPage={pokemonsPerPage}
           allPokemons={allPokemons?.length}
           paginado={paginado}
         />
+
         <SearchBar />
         <div className="homeCards">
           {currentPokemons?.length > 0 ? (
