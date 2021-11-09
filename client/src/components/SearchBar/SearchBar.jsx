@@ -1,10 +1,11 @@
-import "./SearchBar.css";
 import React from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getNamePokemons } from "../actions";
+import { getNamePokemons } from "../../actions";
+import { useStyles } from './styles';
 
 export default function SearchBar() {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const [name, setName] = useState("");
 

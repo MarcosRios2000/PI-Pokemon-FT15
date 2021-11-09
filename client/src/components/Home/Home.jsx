@@ -1,4 +1,3 @@
-import "./Home.css";
 import React from "react";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,13 +9,15 @@ import {
   orderByName,
   orderByAttack,
   reloadPokemons,
-} from "../actions";
+} from "../../actions";
 import { Link } from "react-router-dom";
-import Card from "./Card";
-import Paginado from "./Paginado";
-import SearchBar from "./SearchBar";
+import Card from "../Card/Card";
+import Paginado from "../Paginado/Paginado";
+import SearchBar from "../SearchBar/SearchBar";
+import { useStyles } from './styles';
 
 export default function Home() {
+  const classes = useStyles();
   const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
@@ -85,7 +86,7 @@ export default function Home() {
       </div>
       <h1 className="titulo">POKÉMON</h1>
       <button
-        className="boton1"
+        className={classes.boton1}
         onClick={(e) => {
           handleClick(e);
         }}
@@ -126,7 +127,7 @@ export default function Home() {
         />
 
         <SearchBar />
-        <div className="homeCards">
+        <div className={classes.homeCards}>
           {currentPokemons?.length > 0 ? (
             currentPokemons?.map((e) => {
               return (

@@ -1,8 +1,8 @@
-import "./PokemonCreate.css";
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { postPokemon, getTypes, reloadPokemons } from "../actions/index";
+import { postPokemon, getTypes, reloadPokemons } from "../../actions/index";
 import { useDispatch, useSelector } from "react-redux";
+import { useStyles } from './styles';
 
 const initialState = {
   name: "",
@@ -17,6 +17,7 @@ const initialState = {
 };
 
 export default function CharacterCreate() {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const types = useSelector((state) => state.types);
   const [error, setError] = useState(initialState);
