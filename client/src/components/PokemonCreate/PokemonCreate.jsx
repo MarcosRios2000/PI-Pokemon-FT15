@@ -111,7 +111,8 @@ export default function CharacterCreate() {
       </Link>
       <h1 style={{ color: "white" }}>Creá tu Pokemon </h1>
       <form onSubmit={handleSubmit}>
-        <div className={`inputContainer ${error.name ? "danger" : ""}`}>
+        {/* <div className={`inputContainer ${error.name ? "danger" : ""}`}> */}
+        <div className={error.name ? classes.inputContainerDanger : classes.inputContainer}>
           <label>Nombre:</label>
           <input
             onChange={(e) => {

@@ -10,11 +10,20 @@ import {
   orderByAttack,
   reloadPokemons,
 } from "../../actions";
+import {
+  select,
+  label
+ } from '../../MUIStylesConstants/Constants'
 import { Link } from "react-router-dom";
 import Card from "../Card/Card";
 import Paginado from "../Paginado/Paginado";
 import SearchBar from "../SearchBar/SearchBar";
 import { useStyles } from './styles';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 export default function Home() {
   const classes = useStyles();
@@ -29,6 +38,10 @@ export default function Home() {
   const [currentPage, setCurrentPage] = useState(1);
   const [orden, setOrden] = useState("");
   const [orden2, setOrden2] = useState("");
+  const [alf, setAlf] = useState("");
+  const [att, setAtt] = useState("");
+  const [types, setTypes] = useState("")
+  const [creation, setCreation] = useState("")
   const [pokemonsPerPage, setPokemonsPerPage] = useState(9);
   const indexOfLastPokemon = currentPage * pokemonsPerPage;
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage;
@@ -47,6 +60,7 @@ export default function Home() {
     setLoading(false);
   }, [dispatch]);
 
+  
   function handleClick(e) {
     e.preventDefault();
     //dispatch(getPokemons());
@@ -56,9 +70,11 @@ export default function Home() {
 
   function handleFilterTypes(e) {
     dispatch(filterByType(e.target.value));
+    setTypes(e.target.value)
   }
   function handleFilterCreation(e) {
     dispatch(filterByCreation(e.target.value));
+    setCreation(e.target.value);
   }
 
   function handleSortAlf(e) {
@@ -66,6 +82,7 @@ export default function Home() {
     dispatch(orderByName(e.target.value));
     setCurrentPage(1);
     setOrden(`Ordenado ${e.target.value}`);
+    setAlf(e.target.value);
   }
 
   function handleSortAtt(e) {
@@ -73,6 +90,7 @@ export default function Home() {
     dispatch(orderByAttack(e.target.value));
     setCurrentPage(1);
     setOrden2(`Ordenado ${e.target.value}`);
+    setAtt(e.target.value);
   }
 
   return loading ? (
@@ -95,36 +113,75 @@ export default function Home() {
       </button>
       <div className="content-select">
         <div>
-          <select onChange={(e) => handleSortAlf(e)}>
-            <option value="asc_alf">Ascendente alfabetico</option>
-            <option value="desc_alf">Descendente alfabetico</option>
-          </select>
-          <select onChange={(e) => handleSortAtt(e)}>
-            <option value="asc_fu">Ascendente por fuerza</option>
-            <option value="desc_fu">Descendente por fuerza</option>
-          </select>
-          <select onChange={(e) => handleFilterTypes(e)}>
-            <option value="All">Todos</option>
+            <FormControl>
+          <InputLabel sx={label} id="demo-simple-select-label">Alf</InputLabel>
+          <Select
+          onChange={(e) => handleSortAlf(e)}
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={alf}
+          label="Alf"
+          sx={select}
+          >
+            <MenuItem value={"asc_alf"}>Ascendente</MenuItem>
+            <MenuItem value={"desc_alf"}>Descendente</MenuItem>
+          </Select>
+          </FormControl>
+          <FormControl>
+          <InputLabel sx={label} id="demo-simple-select-label">Attack</InputLabel>
+          <Select
+          onChange={(e) => handleSortAtt(e)}
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={att}
+          label="Att"
+          sx={select}
+          >
+            <MenuItem value={"asc_fu"}>Ascendente</MenuItem>
+            <MenuItem value={"desc_fu"}>Descendente</MenuItem>
+          </Select>
+          </FormControl>
+          <FormControl>
+          <InputLabel sx={label} id="demo-simple-select-label">Types</InputLabel>
+          <Select
+          onChange={(e) => handleFilterTypes(e)}
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={types}
+          label="Types"
+          sx={select}
+          >
+            <MenuItem value={"All"}>All</MenuItem>
             {allTypes?.map((e) => {
               return (
-                <option value={e.name} key={e.name}>
-                  {e.name.charAt(0).toUpperCase() + e.name.slice(1)}
-                </option>
+                <MenuItem value={e.name} key={e.name}>{e.name.charAt(0).toUpperCase() + e.name.slice(1)}</MenuItem>
               );
             })}
-          </select>
-          <select onChange={(e) => handleFilterCreation(e)}>
-            <option value="All">Todos</option>
-            <option value="created">Creados</option>
-            <option value="api">Existentes</option>
-          </select>
+            
+          </Select>
+          </FormControl>
+          <FormControl>
+          <InputLabel sx={label} id="demo-simple-select-label">Creation</InputLabel>
+          <Select
+          onChange={(e) => handleFilterCreation(e)}
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={creation}
+          label="Creation"
+          sx={select}
+          >
+            <MenuItem value={"All"}>All</MenuItem>
+            <MenuItem value={"created"}>Created</MenuItem>
+            <MenuItem value={"api"}>Existant</MenuItem>
+          </Select>
+          </FormControl>
         </div>
 
         <Paginado
           pokemonsPerPage={pokemonsPerPage}
           allPokemons={allPokemons?.length}
           paginado={paginado}
-        />
+        /> 
 
         <SearchBar />
         <div className={classes.homeCards}>
