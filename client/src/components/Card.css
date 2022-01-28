@@ -13,7 +13,8 @@
 .cardContainer {
   background-color: rgba(85, 70, 70, 0.308);
   border-radius: 5px;
-  width: 80%;
+  width: 270px;
   margin: 0 auto;
-  box-shadow: 0px 4px 10px rgba(188, 226, 250, 0.24);
+  box-shadow: 0px 4px 10px #49896F;
+  
 }

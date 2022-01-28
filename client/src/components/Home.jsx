@@ -48,9 +48,9 @@ export default function Home() {
 
   function handleClick(e) {
     e.preventDefault();
-    //dispatch(getPokemons());
+    dispatch(getPokemons());
     dispatch(getTypes());
-    dispatch(reloadPokemons());
+    // dispatch(reloadPokemons());
   }
 
   function handleFilterTypes(e) {
@@ -75,7 +75,7 @@ export default function Home() {
   }
 
   return loading ? (
-    <div className="cargando">"Cargando..."</div>
+    <div className="cargando">Cargando..</div>
   ) : (
     <div className="Home">
       <div>
@@ -83,7 +83,8 @@ export default function Home() {
           Crear pokemon
         </Link>
       </div>
-      <h1 className="titulo">POKÉMON</h1>
+      <div>
+      <img className="Logo" src="./images/Logo.png" alt="logoBlanco"/></div>
       <button
         className="boton1"
         onClick={(e) => {
@@ -95,12 +96,12 @@ export default function Home() {
       <div className="content-select">
         <div>
           <select onChange={(e) => handleSortAlf(e)}>
-            <option value="asc_alf">Ascendente alfabetico</option>
-            <option value="desc_alf">Descendente alfabetico</option>
+            <option value="asc_alf">Orden alfabético ↑</option>
+            <option value="desc_alf">Orden alfabético ↓</option>
           </select>
           <select onChange={(e) => handleSortAtt(e)}>
-            <option value="asc_fu">Ascendente por fuerza</option>
-            <option value="desc_fu">Descendente por fuerza</option>
+            <option value="asc_fu">Fuerza ↑</option>
+            <option value="desc_fu">Fuerza ↓</option>
           </select>
           <select onChange={(e) => handleFilterTypes(e)}>
             <option value="All">Todos</option>
@@ -120,13 +121,14 @@ export default function Home() {
         </div>
 
         <Paginado
+        className="homePaginado"
           pokemonsPerPage={pokemonsPerPage}
           allPokemons={allPokemons?.length}
           paginado={paginado}
         />
 
         <SearchBar />
-        <div className="homeCards">
+        <div className={`homeCards ${allPokemons?.length > 1 ? "" : "cargando"}`}>
           {currentPokemons?.length > 0 ? (
             currentPokemons?.map((e) => {
               return (
@@ -148,7 +150,10 @@ export default function Home() {
               </Link>
             </div>
           ) : (
-            <div className="cargando">"Cargando..."</div>
+            <div className="cargandoContainer">
+              <div>Cargando...</div>
+            <img className="cargandoGif" src="./images/LoadingPikachu.gif" alt=""></img>
+            </div>
           )}
         </div>
       </div>

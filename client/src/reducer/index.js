@@ -1,6 +1,9 @@
+import { reloadPokemons } from "../actions";
+
 const initialState = {
   pokemons: [],
   allPokemons: [],
+  reloadPokemons:[],
   detail: [],
   types: [],
 };
@@ -12,11 +15,12 @@ function rootReducer(state = initialState, action) {
         ...state,
         pokemons: action.payload,
         allPokemons: action.payload,
+        reloadPokemons: action.payload,
       };
     case "RELOAD_POKEMONS":
       return {
         ...state,
-        pokemons: state.allPokemons,
+        pokemons: state.reloadPokemons,
       };
     case "GET_NAME_POKEMONS":
       return {

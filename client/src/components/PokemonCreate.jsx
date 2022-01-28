@@ -145,7 +145,7 @@ export default function CharacterCreate() {
               handleInputChange(e);
               validateInput(e);
             }}
-            type="number"
+            type="text"
             name="healthpoints"
             value={input.healthpoints}
           />
@@ -158,7 +158,7 @@ export default function CharacterCreate() {
               handleInputChange(e);
               validateInput(e);
             }}
-            type="number"
+            type="text"
             name="attack"
             value={input.attack}
           />
@@ -171,7 +171,7 @@ export default function CharacterCreate() {
               handleInputChange(e);
               validateInput(e);
             }}
-            type="number"
+            type="text"
             name="defense"
             value={input.defense}
           />
@@ -184,7 +184,7 @@ export default function CharacterCreate() {
               handleInputChange(e);
               validateInput(e);
             }}
-            type="number"
+            type="text"
             name="speed"
             value={input.speed}
           />
@@ -197,7 +197,7 @@ export default function CharacterCreate() {
               handleInputChange(e);
               validateInput(e);
             }}
-            type="number"
+            type="text"
             name="height"
             value={input.height}
           />
@@ -210,7 +210,7 @@ export default function CharacterCreate() {
               handleInputChange(e);
               validateInput(e);
             }}
-            type="number"
+            type="text"
             name="weight"
             value={input.weight}
           />
