@@ -75,12 +75,12 @@ export default function Home() {
   }
 
   return loading ? (
-    <div className="cargando">Cargando..</div>
+    <div className="cargando">Loading...</div>
   ) : (
     <div className="Home">
       <div>
         <Link className="link" to="/create">
-          Crear pokemon
+          Create your Pokémon
         </Link>
       </div>
       <div>
@@ -91,20 +91,20 @@ export default function Home() {
           handleClick(e);
         }}
       >
-        Volver a cargar los pokemons
+        Reset filters
       </button>
       <div className="content-select">
         <div>
           <select onChange={(e) => handleSortAlf(e)}>
-            <option value="asc_alf">Orden alfabético ↑</option>
-            <option value="desc_alf">Orden alfabético ↓</option>
+            <option value="asc_alf">Alphabetic order ↑</option>
+            <option value="desc_alf">Alphabetic order ↓</option>
           </select>
           <select onChange={(e) => handleSortAtt(e)}>
-            <option value="asc_fu">Fuerza ↑</option>
-            <option value="desc_fu">Fuerza ↓</option>
+            <option value="asc_fu">Strength ↑</option>
+            <option value="desc_fu">Strength ↓</option>
           </select>
           <select onChange={(e) => handleFilterTypes(e)}>
-            <option value="All">Todos</option>
+            <option value="All">All</option>
             {allTypes?.map((e) => {
               return (
                 <option value={e.name} key={e.name}>
@@ -114,12 +114,14 @@ export default function Home() {
             })}
           </select>
           <select onChange={(e) => handleFilterCreation(e)}>
-            <option value="All">Todos</option>
-            <option value="created">Creados</option>
-            <option value="api">Existentes</option>
+            <option value="All">All</option>
+            <option value="created">Fan made</option>
+            <option value="api">Canon</option>
           </select>
         </div>
 
+        <SearchBar />
+        
         <Paginado
         className="homePaginado"
           pokemonsPerPage={pokemonsPerPage}
@@ -127,7 +129,6 @@ export default function Home() {
           paginado={paginado}
         />
 
-        <SearchBar />
         <div className={`homeCards ${allPokemons?.length > 1 ? "" : "cargando"}`}>
           {currentPokemons?.length > 0 ? (
             currentPokemons?.map((e) => {
@@ -151,7 +152,7 @@ export default function Home() {
             </div>
           ) : (
             <div className="cargandoContainer">
-              <div>Cargando...</div>
+              <div>Loading...</div>
             <img className="cargandoGif" src="./images/LoadingPikachu.gif" alt=""></img>
             </div>
           )}

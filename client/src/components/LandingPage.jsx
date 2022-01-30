@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 export default function LandingPage() {
   return (
     <div className="Landing">
-      <h1>Bienvenidos a mi página</h1>
+      <h1>Welcome</h1>
       <Link className="link" to="/home">
-        Ingresar
+        Join
       </Link>
     </div>
   );

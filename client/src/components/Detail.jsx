@@ -40,7 +40,8 @@ export default function Detail(props) {
                   style={{ textTransform: "capitalize" }}
                   key={index}
                 >
-                  <img src={e.image} alt={e.name} />
+                  
+                  <img src={`/images/Types/type${e.name}.png`} alt={e.name} />
                   <p> {e.name} </p>
                 </div>
               );
