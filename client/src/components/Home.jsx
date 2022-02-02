@@ -135,7 +135,7 @@ export default function Home() {
               return (
                 <div key={e.id}>
                   <Link to={"/home/" + e.id}>
-                    <Card name={e.name} image={e.image} types={e.types} />
+                    <Card name={e.name} image={e.image} types={e.types} id={e.id} />
                   </Link>
                 </div>
               );
@@ -147,6 +147,7 @@ export default function Home() {
                   name={currentPokemons.name}
                   image={currentPokemons.image}
                   types={currentPokemons.types}
+                  id={currentPokemons.id}
                 />
               </Link>
             </div>

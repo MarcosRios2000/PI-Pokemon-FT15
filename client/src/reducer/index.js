@@ -12,8 +12,8 @@ const convertBuffer = (pokemons) => {
 const modifiedPokemon = pokemons.map((el)=> {
   if(el.id.length > 10){
     //  el.image = JSON.stringify({ blob: el.image.toString("base64") })
-     
-    console.log(el)
+     const base64 = btoa(String.fromCharCode(...new Uint8Array(el.image)))
+    console.log("chau",el.image)
     return {
       id: el.id,
       name: el.name,
@@ -24,9 +24,10 @@ const modifiedPokemon = pokemons.map((el)=> {
       height: el.height,
       weight: el.weight,
       types: el.types,
-      image: JSON.stringify({ blob: el?.image?.data.toString("base64") })
+      image: el.image
     }
   } else {
+    console.log(el.image)
     return {
       id: el.id,
       name: el.name,

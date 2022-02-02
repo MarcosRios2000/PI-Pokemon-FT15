@@ -21,7 +21,7 @@ export default function CharacterCreate() {
   const [error, setError] = useState(initialState);
   const [input, setInput] = useState(initialState);
   const [selectedFile, setSelectedFile] = useState();
-  const [preview, setPreview] = useState();
+  const [preview, setPreview] = useState("");
 
   
 
