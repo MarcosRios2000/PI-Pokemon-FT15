@@ -140,7 +140,7 @@ export default function Home() {
                 </div>
               );
             })
-          ) : Object.entries(currentPokemons).length !== 0 ? (
+          ) : Object.entries(currentPokemons && currentPokemons).length !== 0 ? (
             <div key={currentPokemons.id}>
               <Link to={"/home/" + currentPokemons.id}>
                 <Card

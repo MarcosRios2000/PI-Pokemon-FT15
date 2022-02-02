@@ -16,9 +16,7 @@ module.exports = (sequelize) => {
       unique: true,
     },
     image: {
-      type: DataTypes.STRING,
-      defaultValue:
-        "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg",
+      type: DataTypes.BLOB,
     },
     healthpoints: {
       type: DataTypes.INTEGER,

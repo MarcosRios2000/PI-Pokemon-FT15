@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 const initialState = {
   name: "",
-  image: "",
   healthpoints: "",
   attack: "",
   defense: "",
@@ -21,6 +20,10 @@ export default function CharacterCreate() {
   const types = useSelector((state) => state.types);
   const [error, setError] = useState(initialState);
   const [input, setInput] = useState(initialState);
+  const [selectedFile, setSelectedFile] = useState();
+  const [preview, setPreview] = useState();
+
+  
 
   const handleInputChange = function (e) {
     setInput({
@@ -68,6 +71,16 @@ export default function CharacterCreate() {
     setInput(initialState);
   };
 
+  const onSelectFile = e => {
+    if (!e.target.files || e.target.files.length === 0) {
+        setSelectedFile(undefined)
+        return
+    }
+
+    
+    setSelectedFile(e.target.files[0])
+}
+
   const handleSelectTypes = function (e) {
     let type1 = document.getElementById("main-type").value;
     e.target.name === "main-type"
@@ -94,14 +107,32 @@ export default function CharacterCreate() {
 
   const handleSubmit = function (e) {
     e.preventDefault();
-    dispatch(postPokemon(input));
+    dispatch(postPokemon(input, preview));
     dispatch(reloadPokemons());
     clearForm();
   };
+  
+
 
   useEffect(() => {
     dispatch(getTypes());
+   
   }, []);
+
+  console.log(preview)
+
+
+  useEffect(() => {
+    if (!selectedFile) {
+        setPreview(undefined)
+        return
+    }
+
+    const objectUrl = URL.createObjectURL(selectedFile)
+    setPreview(objectUrl)
+
+    return () => URL.revokeObjectURL(objectUrl)
+}, [selectedFile])
 
   return (
     <div className="container"> 
@@ -260,7 +291,10 @@ export default function CharacterCreate() {
           )}
         </div>
       </div>
-      <div className="dropbox">x</div>
+      <div className="dropbox">
+        <img src={preview} alt="asdasd" />
+      <input onChange={onSelectFile} type="file"/>
+    </div>
       </div> 
         <button className={`button ${(error.name
                                     || error.healthpoints

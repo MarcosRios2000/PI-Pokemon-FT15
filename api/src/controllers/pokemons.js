@@ -161,29 +161,24 @@ async function getPokemonByName(req, res, next) {
 async function addPokemon(req, res, next) {
   await updateTypes();
   const {
-    name,
-    image,
-    healthpoints,
-    attack,
-    defense,
-    speed,
-    height,
-    weight,
-    types,
+   input,
+   image
   } = req.body;
+  console.log("Body", req.body)
+  console.log("Created name", input.name)
   try {
     const new_pokemon = await Pokemon.create({
       id: uuidv4(),
-      name,
+      name: input.name,
       image,
-      healthpoints,
-      attack,
-      defense,
-      speed,
-      height,
-      weight,
+      healthpoints:input.healthpoints,
+      attack:input.attack,
+      defense:input.defense,
+      speed:input.speed,
+      height:input.height,
+      weight:input.weight,
     });
-    solved_types = types?.map((type) => type.name);
+    solved_types = input?.types?.map((type) => type.name);
     await new_pokemon.addTypes(solved_types);
     console.log(new_pokemon.id);
     res.send(new_pokemon);

@@ -8,14 +8,50 @@ const initialState = {
   types: [],
 };
 
+const convertBuffer = (pokemons) => {
+const modifiedPokemon = pokemons.map((el)=> {
+  if(el.id.length > 10){
+    //  el.image = JSON.stringify({ blob: el.image.toString("base64") })
+     
+    console.log(el)
+    return {
+      id: el.id,
+      name: el.name,
+      healthpoints: el.healthpoints,
+      attack: el.attack,
+      defense: el.defense,
+      speed: el.speed,
+      height: el.height,
+      weight: el.weight,
+      types: el.types,
+      image: JSON.stringify({ blob: el?.image?.data.toString("base64") })
+    }
+  } else {
+    return {
+      id: el.id,
+      name: el.name,
+      healthpoints: el.healthpoints,
+      attack: el.attack,
+      defense: el.defense,
+      speed: el.speed,
+      height: el.height,
+      weight: el.weight,
+      types: el.types,
+      image: el.image
+    }
+  }
+})
+return modifiedPokemon
+}
+ 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
     case "GET_POKEMONS":
       return {
         ...state,
-        pokemons: action.payload,
-        allPokemons: action.payload,
-        reloadPokemons: action.payload,
+        pokemons: convertBuffer(action.payload),
+        allPokemons:  convertBuffer(action.payload),
+        reloadPokemons:  convertBuffer(action.payload),
       };
     case "RELOAD_POKEMONS":
       return {
