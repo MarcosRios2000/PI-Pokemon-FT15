@@ -7,12 +7,12 @@ import { useDispatch, useSelector } from "react-redux";
 const initialState = {
   name: "",
   image: "",
-  healthpoints: null,
-  attack: null,
-  defense: null,
-  speed: null,
-  height: null,
-  weight: null,
+  healthpoints: "",
+  attack: "",
+  defense: "",
+  speed: "",
+  height: "",
+  weight: "",
   types: [],
 };
 
@@ -39,8 +39,8 @@ export default function CharacterCreate() {
       "height",
       "weight",
     ];
-    let isNumber = (input) => (typeof input === "number" ? true : false);
-    let onlyLeters = new RegExp("/^[A-Z]+$/i");
+    // let isNumber = (input) => (typeof input === "number" ? true : false);
+    // let onlyLeters = new RegExp("/^[A-Z]+$/i");
     if (name === "name") {
       if (!/^[A-Z]+$/i.test(e.target.value)) {
         setError({ ...error, [name]: "Must only contain letters" });
@@ -56,8 +56,8 @@ export default function CharacterCreate() {
       }
     }
     if (numerics.includes(name)) {
-      if (!/^([0-9])*$/.test(e.target.value)) {
-        setError({ ...error, [name]: "Stats must only contain numbers" });
+      if (!/^([0-9])*$/.test(e.target.value) || e.target.value.length === 0) {
+        setError({ ...error, [name]: "Stats must be numbers" });
       } else {
         setError({ ...error, [name]: "" });
       }
@@ -76,17 +76,17 @@ export default function CharacterCreate() {
           types: [
             {
               name: e.target.value,
-              image: `https://typedex.app/types/${e.target.value}.png`,
+              image: `/images/Types/type${e.target.value}.png`,
             },
           ],
         })
       : setInput({
           ...input,
           types: [
-            { name: type1, image: `https://typedex.app/types/${type1}.png` },
+            { name: type1, image: `/images/Types/type${type1}.png` },
             {
               name: e.target.value,
-              image: `https://typedex.app/types/${e.target.value}.png`,
+              image: `/images/Types/type${e.target.value}.png`,
             },
           ],
         });
@@ -106,17 +106,17 @@ export default function CharacterCreate() {
   return (
     <div className="container"> 
       <div className="formContainer">
+      <form onSubmit={handleSubmit}>
       <Link className="link" to="/home">
         Return
       </Link>
       <h1 style={{ color: "white" }}>Create your Pokémon</h1>
       <div className="inputs">
         <div className="divForm">
-      <form onSubmit={handleSubmit}>
         <div className={`inputContainer ${error.name ? "danger" : ""}`}>
           <div className="formTitle">
-          <label>Name</label>
-          <label className="error">{error?.name}</label>
+          <div>Name</div>
+          <div className="error">{error?.name}</div>
           </div>
           <input
             onChange={(e) => {
@@ -144,8 +144,10 @@ export default function CharacterCreate() {
           <span className="error">{error?.image}</span>
         </div> */}
         <div className={`inputContainer ${error.healthpoints ? "danger" : ""}`}>
-          <label>Healthpoints</label>
-          <span className="error">{error?.healthpoints}</span>
+          <div className="formTitle">
+          <div>Healthpoints</div>
+          <div className="error">{error?.healthpoints}</div>
+          </div>
           <input
             onChange={(e) => {
               handleInputChange(e);
@@ -157,8 +159,10 @@ export default function CharacterCreate() {
           />
         </div>
         <div className={`inputContainer ${error.attack ? "danger" : ""}`}>
-          <label>Attack</label>
-          <span className="error">{error?.attack}</span>
+        <div className="formTitle">
+          <div>Attack</div>
+          <div className="error">{error?.attack}</div>
+          </div>
           <input
             onChange={(e) => {
               handleInputChange(e);
@@ -170,7 +174,10 @@ export default function CharacterCreate() {
           />
         </div>
         <div className={`inputContainer ${error.defense ? "danger" : ""}`}>
-          <label>Defense</label>
+        <div className="formTitle">
+          <div>Defense</div>
+          <div className="error">{error?.defense}</div>
+          </div>
           <input
             onChange={(e) => {
               handleInputChange(e);
@@ -180,11 +187,12 @@ export default function CharacterCreate() {
             name="defense"
             value={input.defense}
           />
-          <span className="error">{error?.defense}</span>
         </div>
         <div className={`inputContainer ${error.speed ? "danger" : ""}`}>
-          <label>Speed</label>
-          <span className="error">{error?.speed}</span>
+        <div className="formTitle">
+          <div>Speed</div>
+          <div className="error">{error?.speed}</div>
+          </div>
           <input
             onChange={(e) => {
               handleInputChange(e);
@@ -196,8 +204,10 @@ export default function CharacterCreate() {
           />
         </div>
         <div className={`inputContainer ${error.height ? "danger" : ""}`}>
-          <label>Height</label>
-          <span className="error">{error?.height}</span>
+        <div className="formTitle">
+          <div>Height</div>
+          <div className="error">{error?.height}</div>
+          </div>
           <input
             onChange={(e) => {
               handleInputChange(e);
@@ -209,8 +219,10 @@ export default function CharacterCreate() {
           />
         </div>
         <div className={`inputContainer ${error.weight ? "danger" : ""}`}>
-          <label>Weight</label>
-          <span className="error">{error?.weight}</span>
+        <div className="formTitle">
+          <div>Weight</div>
+          <div className="error">{error?.weight}</div>
+          </div>
           <input
             onChange={(e) => {
               handleInputChange(e);
@@ -247,14 +259,48 @@ export default function CharacterCreate() {
             </select>
           )}
         </div>
-      </form>
       </div>
       <div className="dropbox">x</div>
       </div> 
-        <button className="button" type="submit">
-          Submit
+        <button className={`button ${(error.name
+                                    || error.healthpoints
+                                    || error.attack
+                                    || error.defense
+                                    || error.speed
+                                    || error.height
+                                    || error.weight)
+                                    || (input.name.length === 0
+                                      || input.healthpoints.length === 0 
+                                      || input.attack.length === 0
+                                      || input.defense.length === 0
+                                      || input.speed.length === 0
+                                      || input.height.length === 0
+                                      || input.weight.length === 0
+                                      || input.types.length === 0
+                                        )
+                                        ? "buttonDanger" : ""}`} type={`${(error.name
+                                          || error.healthpoints
+                                          || error.attack
+                                          || error.defense
+                                          || error.speed
+                                          || error.height
+                                          || error.weight)
+                                          || (input.name.length === 0
+                                            || input.healthpoints.length === 0 
+                                            || input.attack.length === 0
+                                            || input.defense.length === 0
+                                            || input.speed.length === 0
+                                            || input.height.length === 0
+                                            || input.weight.length === 0
+                                            || input.types.length === 0
+                                              )
+                                              ? "button" : "submit"}`}>
+          Create
         </button>
+                                      </form>
       </div>
     </div>
   );
 }
+
+
