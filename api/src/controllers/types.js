@@ -5,6 +5,7 @@ async function requestAllTypes(req, res, next) {
   const answer = await axios.get("https://pokeapi.co/api/v2/type/?limit=18");
   try {
     const data = answer.data.results;
+
     return data;
   } catch {
     (err) => {

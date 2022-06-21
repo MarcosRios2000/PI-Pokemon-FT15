@@ -31,24 +31,16 @@
   font-size: 18px;
   border-radius: 4px;
 }
-.content-select select {
-  appearance: none;
+.filtersAndOrders select{
   -webkit-appearance: none;
   -moz-appearance: none;
-  margin: 0.5rem;
-  border-radius: 4px;
-}
-.content-select select::-ms-expand {
-  display: none;
-}
-.content-select select {
+  background: white;
+  border-radius: 5px;
+  margin: 10px;
+  border: 1px solid black;
+  min-width: 70px;
+  text-align-last:center;
+  min-height: 25px;
+  padding-top: 5px;
   cursor: pointer;
-  padding: 4px 4px;
-  outline: 0;
-  border: 0;
-  background: #c7a008;
-  color: #000000;
-  font-size: 18px;
-  color: rgb(0, 0, 0);
-  margin-right: 5px;
 }

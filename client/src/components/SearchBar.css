@@ -18,3 +18,33 @@
   display: inline-block;
   font-size: 18px;
 }
+.inputSearch{
+  border: 1px solid black;
+  height: 20px;
+  padding: 3px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+.inputSearch:active{
+  box-shadow: none;
+  outline: none !important;
+}
+.inputSearch:focus-visible{
+  box-shadow: none;
+  outline: none !important;
+}
+.inputSearch:focus{
+  box-shadow: none;
+  outline: none !important;
+}
+.buttonSearch{
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border: 1px solid black;
+  min-height: 27px;
+  cursor: pointer;
+  background-color: white;
+}
+.buttonSearch:hover{
+  background-color: rgb(202, 202, 202);
+}

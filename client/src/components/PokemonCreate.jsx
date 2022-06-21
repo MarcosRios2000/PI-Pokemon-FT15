@@ -3,16 +3,17 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { postPokemon, getTypes, reloadPokemons } from "../actions/index";
 import { useDispatch, useSelector } from "react-redux";
+import Swal from 'sweetalert2'
 
 const initialState = {
   name: "",
   image: "",
-  healthpoints: null,
-  attack: null,
-  defense: null,
-  speed: null,
-  height: null,
-  weight: null,
+  healthpoints: '',
+  attack: '',
+  defense: '',
+  speed: '',
+  height: '',
+  weight: '',
   types: [],
 };
 
@@ -56,7 +57,7 @@ export default function CharacterCreate() {
       }
     }
     if (numerics.includes(name)) {
-      if (e.target.value === "") {
+      if (!/^\d+$/.test(e.target.value)) {
         setError({ ...error, [name]: "Las estadisticas deben ser numericas" });
       } else {
         setError({ ...error, [name]: "" });
@@ -97,6 +98,11 @@ export default function CharacterCreate() {
     dispatch(postPokemon(input));
     dispatch(reloadPokemons());
     clearForm();
+    Swal.fire(
+      'Felicidades!',
+      'Pokémon creado con éxito!',
+      'success'
+    )
   };
 
   useEffect(() => {
@@ -104,7 +110,7 @@ export default function CharacterCreate() {
   }, []);
 
   return (
-    <div>
+    <div className="createContainer">
       <Link className="link" to="/home">
         Volver
       </Link>
@@ -145,7 +151,7 @@ export default function CharacterCreate() {
               handleInputChange(e);
               validateInput(e);
             }}
-            type="number"
+            type="text"
             name="healthpoints"
             value={input.healthpoints}
           />
@@ -158,7 +164,7 @@ export default function CharacterCreate() {
               handleInputChange(e);
               validateInput(e);
             }}
-            type="number"
+            type="text"
             name="attack"
             value={input.attack}
           />
@@ -171,7 +177,7 @@ export default function CharacterCreate() {
               handleInputChange(e);
               validateInput(e);
             }}
-            type="number"
+            type="text"
             name="defense"
             value={input.defense}
           />
@@ -184,7 +190,7 @@ export default function CharacterCreate() {
               handleInputChange(e);
               validateInput(e);
             }}
-            type="number"
+            type="text"
             name="speed"
             value={input.speed}
           />
@@ -197,7 +203,7 @@ export default function CharacterCreate() {
               handleInputChange(e);
               validateInput(e);
             }}
-            type="number"
+            type="text"
             name="height"
             value={input.height}
           />
@@ -210,7 +216,7 @@ export default function CharacterCreate() {
               handleInputChange(e);
               validateInput(e);
             }}
-            type="number"
+            type="text"
             name="weight"
             value={input.weight}
           />
@@ -242,7 +248,39 @@ export default function CharacterCreate() {
             </select>
           )}
         </div>
-        <button className="button" type="submit">
+        <button className={`button ${(error.name
+                                    || error.healthpoints
+                                    || error.attack
+                                    || error.defense
+                                    || error.speed
+                                    || error.height
+                                    || error.weight)
+                                    || (input.name.length === 0
+                                      || input.healthpoints.length === 0 
+                                      || input.attack.length === 0
+                                      || input.defense.length === 0
+                                      || input.speed.length === 0
+                                      || input.height.length === 0
+                                      || input.weight.length === 0
+                                      || input.types.length === 0
+                                        )
+                                        ? "buttonDanger" : ""}`} type={`${(error.name
+                                          || error.healthpoints
+                                          || error.attack
+                                          || error.defense
+                                          || error.speed
+                                          || error.height
+                                          || error.weight)
+                                          || (input.name.length === 0
+                                            || input.healthpoints.length === 0 
+                                            || input.attack.length === 0
+                                            || input.defense.length === 0
+                                            || input.speed.length === 0
+                                            || input.height.length === 0
+                                            || input.weight.length === 0
+                                            || input.types.length === 0
+                                              )
+                                              ? "button" : "submit"}`}>
           Submit
         </button>
       </form>

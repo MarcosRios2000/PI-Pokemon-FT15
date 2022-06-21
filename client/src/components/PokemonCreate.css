@@ -16,3 +16,45 @@
 .selectCreate select {
   margin: 1rem 0.5rem;
 }
+.createContainer input{
+background-color: rgb(184, 169, 149);
+border: 1px solid black;
+border-radius: 5px;
+margin: 3px;
+outline: none !important;
+height: 20px;
+}
+.buttonDanger{
+  color: #f5f5f567;
+  margin: 1rem auto;
+  border: 1px solid  #f5f5f567;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  display: block;
+  position: relative;
+  width: fit-content;
+}
+.buttonDanger:hover{
+  color: #f5f5f567;
+  margin: 1rem auto;
+  border: 1px solid  #f5f5f567;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  display: block;
+  position: relative;
+  width: fit-content;
+  background-color: transparent;
+}
+.selectCreate select{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: white;
+  border-radius: 5px;
+  margin: 10px;
+  border: 1px solid black;
+  min-width: 70px;
+  text-align-last:center;
+  min-height: 25px;
+  padding-top: 5px;
+  cursor: pointer;
+}

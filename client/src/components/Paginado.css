@@ -18,19 +18,23 @@
 .paginacion ul li {
   display: inline-block;
   margin-right: 5px;
+  cursor: pointer;
 }
 
 .paginacion ul li a {
   display: block;
   padding: 4px 10px;
-  color: rgb(0, 0, 0);
-  background: #c7a008;
+  color: white;
+  background: transparent;
+  border: 1px solid white;
   text-decoration: none;
   border-radius: 8px;
 }
 
 .paginacion ul li a:hover {
-  background: #037e8c;
+  border: 1px solid white;
+  background: white;
+  color: black;
 }
 
 .paginacion ul li .active {

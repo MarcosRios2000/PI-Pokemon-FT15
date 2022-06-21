@@ -83,17 +83,9 @@ export default function Home() {
         </Link>
       </div>
       <h1 className="titulo">POKÉMON</h1>
-      <button
-        className="boton1"
-        onClick={(e) => {
-          handleClick(e);
-        }}
-      >
-        Volver a cargar los pokemons
-      </button>
       <div className="content-select">
-        <div>
-          <select onChange={(e) => handleSortAlf(e)}>
+        <div className="filtersAndOrders">
+          <select className="sortAlfabetic" onChange={(e) => handleSortAlf(e)}>
             <option value="asc_alf">Ascendente alfabetico</option>
             <option value="desc_alf">Descendente alfabetico</option>
           </select>
