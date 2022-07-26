@@ -23,7 +23,7 @@ export default function Home() {
 
   const allPokemons = useSelector((state) => state.pokemons);
   const allTypes = useSelector((state) => state.types);
-  console.log(allTypes, "LINEA 26")
+  
 
   const [currentPage, setCurrentPage] = useState(1);
   const [orden, setOrden] = useState("");
@@ -34,7 +34,7 @@ export default function Home() {
   const currentPokemons = Array.isArray(allPokemons)
     ? allPokemons?.slice(indexOfFirstPokemon, indexOfLastPokemon)
     : allPokemons;
-  console.log(currentPokemons);
+
 
   const paginado = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -48,9 +48,9 @@ export default function Home() {
 
   function handleClick(e) {
     e.preventDefault();
-    dispatch(getPokemons());
-    dispatch(getTypes());
-    // dispatch(reloadPokemons());
+    // dispatch(getPokemons());
+    // dispatch(getTypes());
+    dispatch(reloadPokemons());
   }
 
   function handleFilterTypes(e) {
@@ -135,18 +135,19 @@ export default function Home() {
               return (
                 <div key={e.id}>
                   <Link to={"/home/" + e.id}>
-                    <Card name={e.name} image={e.image} types={e.types} />
+                    <Card name={e.name} image={e.image} types={e.types} id={e.id} />
                   </Link>
                 </div>
               );
             })
-          ) : Object.entries(currentPokemons).length !== 0 ? (
+          ) : Object.entries(currentPokemons && currentPokemons).length !== 0 ? (
             <div key={currentPokemons.id}>
               <Link to={"/home/" + currentPokemons.id}>
                 <Card
                   name={currentPokemons.name}
                   image={currentPokemons.image}
                   types={currentPokemons.types}
+                  id={currentPokemons.id}
                 />
               </Link>
             </div>

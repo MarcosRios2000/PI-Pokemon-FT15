@@ -19,7 +19,7 @@ export function reloadPokemons() {
 export function getNamePokemons(name) {
   return async function (dispatch) {
     try {
-      var json = await axios.get("http://localhost:3001/pokemons?name=" + name);
+      var json = await axios.get("http://localhost:3001/pokemons?name=" + name.toLowerCase());
       return dispatch({
         type: "GET_NAME_POKEMONS",
         payload: json.data,
