@@ -8,7 +8,7 @@ const initialState = {
   name: "",
   image: "",
   healthpoints: null,
-  attack: null,
+  attack:null,
   defense: null,
   speed: null,
   height: null,
@@ -40,10 +40,10 @@ export default function CharacterCreate() {
       "weight",
     ];
     let isNumber = (input) => (typeof input === "number" ? true : false);
-    let onlyLeters = new RegExp("/^[A-Z]+$/i");
+    let onlyLeters = new RegExp('/^[A-Z]+$/i')
     if (name === "name") {
       if (!/^[A-Z]+$/i.test(e.target.value)) {
-        setError({ ...error, [name]: "Must only contain letters" });
+        setError({ ...error, [name]: "El nombre solo debe contener letras" });
       } else {
         setError({ ...error, [name]: "" });
       }
@@ -56,8 +56,8 @@ export default function CharacterCreate() {
       }
     }
     if (numerics.includes(name)) {
-      if (!/^([0-9])*$/.test(e.target.value)) {
-        setError({ ...error, [name]: "Stats must only contain numbers" });
+      if (e.target.value === "") {
+        setError({ ...error, [name]: "Las estadisticas deben ser numericas" });
       } else {
         setError({ ...error, [name]: "" });
       }
@@ -104,20 +104,14 @@ export default function CharacterCreate() {
   }, []);
 
   return (
-    <div className="container"> 
-      <div className="formContainer">
+    <div>
       <Link className="link" to="/home">
-        Return
+        Volver
       </Link>
-      <h1 style={{ color: "white" }}>Create your Pokémon</h1>
-      <div className="inputs">
-        <div className="divForm">
+      <h1 style={{color:"white"}}>Creá tu Pokemon </h1>
       <form onSubmit={handleSubmit}>
         <div className={`inputContainer ${error.name ? "danger" : ""}`}>
-          <div className="formTitle">
-          <label>Name</label>
-          <label className="error">{error?.name}</label>
-          </div>
+          <label>Nombre:</label>
           <input
             onChange={(e) => {
               handleInputChange(e);
@@ -128,8 +122,9 @@ export default function CharacterCreate() {
             value={input.name}
             className={error && "danger"}
           />
+          <span className="error">{error?.name}</span>
         </div>
-        {/* <div className={`inputContainer ${error.image ? "danger" : ""}`}>
+        <div className={`inputContainer ${error.image ? "danger" : ""}`}>
           <label>Image:</label>
           <input
             onChange={(e) => {
@@ -142,86 +137,86 @@ export default function CharacterCreate() {
             className={error.image && "danger"}
           />
           <span className="error">{error?.image}</span>
-        </div> */}
+        </div>
         <div className={`inputContainer ${error.healthpoints ? "danger" : ""}`}>
-          <label>Healthpoints</label>
-          <span className="error">{error?.healthpoints}</span>
+          <label>Healthpoints:</label>
           <input
             onChange={(e) => {
               handleInputChange(e);
               validateInput(e);
             }}
-            type="text"
+            type="number"
             name="healthpoints"
             value={input.healthpoints}
           />
+          <span className="error">{error?.healthpoints}</span>
         </div>
         <div className={`inputContainer ${error.attack ? "danger" : ""}`}>
-          <label>Attack</label>
-          <span className="error">{error?.attack}</span>
+          <label>Attack:</label>
           <input
             onChange={(e) => {
               handleInputChange(e);
               validateInput(e);
             }}
-            type="text"
+            type="number"
             name="attack"
             value={input.attack}
           />
+          <span className="error">{error?.attack}</span>
         </div>
         <div className={`inputContainer ${error.defense ? "danger" : ""}`}>
-          <label>Defense</label>
+          <label>Defense:</label>
           <input
             onChange={(e) => {
               handleInputChange(e);
               validateInput(e);
             }}
-            type="text"
+            type="number"
             name="defense"
             value={input.defense}
           />
           <span className="error">{error?.defense}</span>
         </div>
         <div className={`inputContainer ${error.speed ? "danger" : ""}`}>
-          <label>Speed</label>
-          <span className="error">{error?.speed}</span>
+          <label>Speed:</label>
           <input
             onChange={(e) => {
               handleInputChange(e);
               validateInput(e);
             }}
-            type="text"
+            type="number"
             name="speed"
             value={input.speed}
           />
+          <span className="error">{error?.speed}</span>
         </div>
         <div className={`inputContainer ${error.height ? "danger" : ""}`}>
-          <label>Height</label>
-          <span className="error">{error?.height}</span>
+          <label>Height:</label>
           <input
             onChange={(e) => {
               handleInputChange(e);
               validateInput(e);
             }}
-            type="text"
+            type="number"
             name="height"
             value={input.height}
           />
+          <span className="error">{error?.height}</span>
         </div>
         <div className={`inputContainer ${error.weight ? "danger" : ""}`}>
-          <label>Weight</label>
-          <span className="error">{error?.weight}</span>
+          <label>Weight:</label>
           <input
             onChange={(e) => {
               handleInputChange(e);
               validateInput(e);
             }}
-            type="text"
+            type="number"
             name="weight"
             value={input.weight}
           />
+          <span className="error">{error?.weight}</span>
         </div>
-        <div className="contentSelect">
+        <div className="selectCreate">
           <select
             id="main-type"
             name="main-type"
@@ -247,14 +242,8 @@ export default function CharacterCreate() {
             </select>
           )}
         </div>
+        <button className="button" type="submit">Submit</button>
       </form>
-      </div>
-      <div className="dropbox">x</div>
-      </div> 
-        <button className="button" type="submit">
-          Submit
-        </button>
-      </div>
     </div>
   );
 }
