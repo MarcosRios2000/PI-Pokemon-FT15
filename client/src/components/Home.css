@@ -4,8 +4,7 @@
 } */
 .homeCards {
   display: grid;
-  /* grid-template-columns: 1fr 1fr 1fr; */
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr 1fr));
+  grid-template-columns: 1fr 1fr 1fr;
   width: 80%;
   background-color: rgba(255, 255, 255, 0.301);
   margin: 0 auto;
@@ -90,10 +89,4 @@
 .cargando{
   display: flex;
   justify-content: center;
-}
-@media (min-width:1050px){
-  .homeCards{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-  }
 }

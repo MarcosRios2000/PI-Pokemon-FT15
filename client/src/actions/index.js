@@ -40,10 +40,11 @@ export function getTypes() {
   };
 }
 
-export function postPokemon(input, image) {
+export function postPokemon(payload) {
   return async function (dispatch) {
     const response = await axios.post(
-      "http://localhost:3001/pokemons",{input, image}
+      "http://localhost:3001/pokemons",
+      payload
     );
     console.log(response);
     return response;

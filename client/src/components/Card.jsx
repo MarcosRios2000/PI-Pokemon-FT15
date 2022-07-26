@@ -1,16 +1,13 @@
 import "./Card.css";
 import React from "react";
 
-export default function Card({ name, image, types, id }) {
-  console.log("hola", image)
+export default function Card({ name, image, types }) {
   return (
     <div className="cardContainer">
       <h3 className="Name" style={{ textTransform: "capitalize" }}>
         {name}
       </h3>
-      {id.length > 10 ? <img src={`data:image/png;base64,${image}`} alt={name} width="200px" height="200px"/>
-      : <img src={image} alt={name} width="200px" height="200px" />
-    }   
+      <img src={image} alt={name} width="200px" height="200px" />
       <div style={{ display: "flex", justifyContent: "center" }}>
         {types.map((e, index) => {
           return (
