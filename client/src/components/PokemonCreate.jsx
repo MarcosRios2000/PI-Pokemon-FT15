@@ -104,14 +104,14 @@ export default function CharacterCreate() {
   }, []);
 
   return (
-    <div>
+    <div className="createContainer">
       <Link className="link" to="/home">
         Volver
       </Link>
-      <h1 style={{color:"white"}}>Creá tu Pokemon </h1>
+      <h1 style={{color:"white"}}>Create your Pokémon</h1>
       <form onSubmit={handleSubmit}>
         <div className={`inputContainer ${error.name ? "danger" : ""}`}>
-          <label>Nombre:</label>
+          <label>Name:</label>
           <input
             onChange={(e) => {
               handleInputChange(e);
@@ -125,7 +125,7 @@ export default function CharacterCreate() {
           <span className="error">{error?.name}</span>
         </div>
         <div className={`inputContainer ${error.image ? "danger" : ""}`}>
-          <label>Image:</label>
+          <label>Image url:</label>
           <input
             onChange={(e) => {
               handleInputChange(e);
@@ -145,7 +145,7 @@ export default function CharacterCreate() {
               handleInputChange(e);
               validateInput(e);
             }}
-            type="number"
+            type="text"
             name="healthpoints"
             value={input.healthpoints}
           />
@@ -158,7 +158,7 @@ export default function CharacterCreate() {
               handleInputChange(e);
               validateInput(e);
             }}
-            type="number"
+            type="text"
             name="attack"
             value={input.attack}
           />
@@ -171,7 +171,7 @@ export default function CharacterCreate() {
               handleInputChange(e);
               validateInput(e);
             }}
-            type="number"
+            type="text"
             name="defense"
             value={input.defense}
           />
@@ -184,7 +184,7 @@ export default function CharacterCreate() {
               handleInputChange(e);
               validateInput(e);
             }}
-            type="number"
+            type="text"
             name="speed"
             value={input.speed}
           />
@@ -197,7 +197,7 @@ export default function CharacterCreate() {
               handleInputChange(e);
               validateInput(e);
             }}
-            type="number"
+            type="text"
             name="height"
             value={input.height}
           />
@@ -210,7 +210,7 @@ export default function CharacterCreate() {
               handleInputChange(e);
               validateInput(e);
             }}
-            type="number"
+            type="text"
             name="weight"
             value={input.weight}
           />
@@ -218,6 +218,7 @@ export default function CharacterCreate() {
         </div>
         <div className="selectCreate">
           <select
+            
             id="main-type"
             name="main-type"
             onChange={(e) => handleSelectTypes(e)}
@@ -234,7 +235,7 @@ export default function CharacterCreate() {
             <select name="second-type" onChange={(e) => handleSelectTypes(e)}>
               {types?.map((e) => {
                 return (
-                  <option value={e.name} key={e.name}>
+                  <option className="selectOption" value={e.name} key={e.name}>
                     {e.name.charAt(0).toUpperCase() + e.name.slice(1)}
                   </option>
                 );
